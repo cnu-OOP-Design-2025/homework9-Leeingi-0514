@@ -6,12 +6,42 @@ using namespace std;
 template<typename T>
 class MyVector {
 /* TODO */
+private:
+    T* data;
+    size_t capacity;
+    size_t length;
 
+    void resize(){
+        cout << "Resize: " << capacity << " -> " << capacity * 2 << endl;
+        capacity = capacity * 2;
+        T* newData = new T[capacity];
+        for (int i = 0; i<length; i++) newData[i] = data[i]; 
+        delete data;
+        data = newData;
+    }
 
-
-
-
-
+public:
+    MyVector(): capacity(2), length(0) {
+        data = new T[capacity];
+    }
+    ~MyVector() {
+        delete data;
+    }
+    void push_back(const T& newElement){
+        if (length == capacity) resize();
+        data[length] = newElement;
+        length++;
+    }
+    T pop_back(){
+        if(length == 0) throw out_of_range("Vector is empty");
+        else return data[--length];
+    }
+    T& operator[](const int index) {
+        return data[index];
+    }
+    size_t size() const {
+        return length;
+    }
 };
 
 template<typename T>
