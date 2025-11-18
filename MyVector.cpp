@@ -36,7 +36,7 @@ public:
         if(length == 0) throw out_of_range("Vector is empty");
         else return data[--length];
     }
-    T& operator[](const int index) {
+    T& operator[](const size_t index) {
         return data[index];
     }
     size_t size() const {
